@@ -1,0 +1,21 @@
+name: AWS example workflow
+on: workflow_dispatch
+
+# permission can be added at job level or workflow level
+permissions:
+  id-token: write   # This is required for requesting the JWT
+  contents: read    # This is required for actions/checkout
+jobs:
+  TestAWSOIDCAccess:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Configure AWS Credentials 1
+      id: creds
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-region: us-east-1
+        role-to-assume: arn:aws:iam::264000169252:role/GitHubAction-AssumeRoleWithAction
+        output-credentials: true
+    - name: get caller identity 1
+      run: |
+        aws sts get-caller-identity
