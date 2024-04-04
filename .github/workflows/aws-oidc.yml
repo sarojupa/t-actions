@@ -19,3 +19,6 @@ jobs:
     - name: get caller identity 1
       run: |
         aws sts get-caller-identity
+    - name:  List s3 buckets
+      run: |
+        aws s3 ls
